@@ -1,3 +1,7 @@
+# Personal Data
+.env
+node_modules
+
 # Logs
 logs
 *.log
