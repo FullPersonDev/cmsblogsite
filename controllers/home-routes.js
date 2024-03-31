@@ -37,10 +37,23 @@ router.get('/dashboard', withAuth, async (req, res) => {
     });
 });
 
-router.get('/', (req, res) => {
-    res.render('homepage', {
-        logged_in: req.session.logged_in,
+router.get('/', async (req, res) => {
+    try {
+        const blogsData = await Blog.findAll({
+            include: [
+                {
+                model: User,
+                attributes: ['name'],
+                }],
+        });
+        const blogs = blogsData.map((blog) => blog.get());
+        res.render('homepage', {
+            blogs: blogs,
+            logged_in: req.session.logged_in,
+        });
+    } catch(error) {
+        console.log(error);
+    }
     });
-});
 
 module.exports = router;
