@@ -13,10 +13,11 @@
     <nav id="nav-bar">
         <a href="/">Home</a>
         <a href="/dashboard">Dashboard</a>
-        {{#if loggedIn}}
+        {{#if logged_in}}
         <button id="logout">Logout</button>
         {{else}}
         <a href="/login">Login</a>
+        <a href="/signup" id="signup">Sign Up</a>
         {{/if}}
     </nav>
     <h1 id="title">The Tech Blog</h1>
