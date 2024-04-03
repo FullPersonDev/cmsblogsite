@@ -7,6 +7,7 @@ const {
 const withAuth = require('../utils/auth');
 const { Sequelize } = require('sequelize');
 
+//Renders Login page
 router.get('/login', (req, res) => {
     if (req.session.logged_in) {
         res.redirect('/');
@@ -15,6 +16,7 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
+//Renders Signup page
 router.get('/signup', (req, res) => {
     if (req.session.logged_in) {
         res.redirect('/');
@@ -22,6 +24,8 @@ router.get('/signup', (req, res) => {
     }
     res.render('signup');
 });
+
+//Renders My Dashboard page, if logged in
 router.get('/dashboard', withAuth, async (req, res) => {
     const blogData = await Blog.findAll({
         include: [
@@ -38,6 +42,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     });
 });
 
+//Renders a single blog view when you click on a blog title
 router.get('/dashboard/:id', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.findByPk(req.params.id, {
@@ -60,6 +65,25 @@ router.get('/dashboard/:id', withAuth, async (req, res) => {
     }
 });
 
+//Renders an 'Edit Blog' page when you click to edit the blog
+router.get('/dashboard/edit/:id', withAuth, async (req, res) => {
+    try {
+        const blogData = await Blog.findByPk(req.params.id);
+        if (blogData) {
+            const blog = blogData.get({ plain: true });
+            res.render('editblog', {
+                blog,
+                logged_in: req.session.logged_in,
+            });
+        } else {
+            res.status(404).send('Blog not found');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//Renders all blogs for the home page view
 router.get('/', async (req, res) => {
     try {
         const blogsData = await Blog.findAll({

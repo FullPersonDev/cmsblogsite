@@ -1,16 +1,5 @@
 <div>
     <h2>My Dashboard</h2>
-    <form action="" id="create-post-form">
-        <div>
-            <label for="title">Post Title:</label>
-            <input type="text" id="post-title" />
-        </div>
-        <div>
-            <label for="description">Post Description:</label>
-            <input type="text" id="post-description" />
-        </div>
-         <button type="submit" id="create-post">Create New Post</button>
-    </form>
     <div id="all-posts">
         {{#each blogs as |blog|}}
         <div class="homepage-blogs">
@@ -21,6 +10,19 @@
         </div>
         {{/each}}
     </div>
+
+    <form action="" id="create-post-form">
+        <h3>Create a New Post</h3>
+        <div class="create-form-section">
+            <label for="title">Post Title:</label>
+            <input type="text" id="post-title"/>
+        </div>
+        <div class="create-form-section">
+            <label for="description">Post Description:</label>
+            <textarea name="post-description" id="post-description" cols="30" rows="4"></textarea>
+        </div>
+            <button type="submit" id="create-post">Create New Post</button>
+    </form>
 </div>
 
 <script src="/js/create-post.js"></script>
