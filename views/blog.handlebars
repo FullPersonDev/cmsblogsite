@@ -1,0 +1,16 @@
+<div>
+    <div class="homepage-blogs">
+        <div class="homepage-blogs-title">
+            <h3>{{blog.title}}</h3><p>Created by: {{blog.user.name}}</p>
+        </div>
+        <div class="homepage-blogs-body">{{blog.description}}</div>
+        <hr/>
+        <div class="homepage-blogs-actions">
+            <h4>Actions for BlogID: <span id="blog-id">{{blog.id}}</span></h4>
+            <button class="comment-post">Comment</button>
+            <button id="edit-post">Edit</button>
+            <button id="delete-post">Delete</button>
+        </div>
+    </div>
+</div>
+<script src="/js/delete-post.js"></script>

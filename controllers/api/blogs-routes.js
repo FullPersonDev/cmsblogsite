@@ -10,7 +10,7 @@ router.get('/', withAuth, async (req, res) => {
         res.status(400).json(error);
     }
 });
-/*
+
 router.get('/user/:id', withAuth, async (req, res) => {
     try {
         const postsData = await Blog.findAll({
@@ -22,7 +22,7 @@ router.get('/user/:id', withAuth, async (req, res) => {
     } catch (error) {
         res.status(400).json(error);
     }
-});*/
+});
 
 router.get('/:id', withAuth, async (req, res) => {
     try {

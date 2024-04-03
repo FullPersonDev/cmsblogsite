@@ -15,7 +15,7 @@
         {{#each blogs as |blog|}}
         <div class="homepage-blogs">
         <div class="homepage-blogs-title">
-            <h3>{{blog.title}}</h3><p>Created by: {{blog.user_id}}</p>
+            <h3><a href="/dashboard/{{blog.id}}">{{blog.title}}</a></h3><p>Created by: {{blog.user.name}}</p>
         </div>
         <div class="homepage-blogs-body">{{blog.description}}</div>
         </div>

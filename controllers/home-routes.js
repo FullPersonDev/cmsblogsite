@@ -27,14 +27,37 @@ router.get('/dashboard', withAuth, async (req, res) => {
         include: [
             {
                 model: User,
+                attributes: ['name'],
             },
         ],
     });
-    const blogs = blogData.map((poll) => poll.get());
+    const blogs = blogData.map((blog) => blog.get({ plain: true }));
     res.render('dashboard', {
-        blogs: blogs,
+        blogs,
         logged_in: req.session.logged_in,
     });
+});
+
+router.get('/dashboard/:id', withAuth, async (req, res) => {
+    try {
+        const blogData = await Blog.findByPk(req.params.id, {
+            include: [{ model: User, attributes: ['name'] }],
+        });
+
+        if(!blogData) {
+            res.status(400).send('Blog not found');
+            return;
+        }
+
+        const blog = blogData.get({ plain: true });
+
+        res.render('blog', {
+            blog,
+            logged_in: req.session.logged_in,
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 router.get('/', async (req, res) => {
@@ -46,9 +69,9 @@ router.get('/', async (req, res) => {
                 attributes: ['name'],
                 }],
         });
-        const blogs = blogsData.map((blog) => blog.get());
+        const blogs = blogsData.map((blog) => blog.get({ plain: true }));
         res.render('homepage', {
-            blogs: blogs,
+            blogs,
             logged_in: req.session.logged_in,
         });
     } catch(error) {
