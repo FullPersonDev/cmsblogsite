@@ -3,8 +3,6 @@ const createPostHandler = async (event) => {
 
     const title = document.querySelector('#post-title').value;
     const description = document.querySelector('#post-description').value;
-    console.log('title:', title);
-    console.log('description:', description);
 
     if (title && description) {
         const response = await fetch('/api/dashboard', {

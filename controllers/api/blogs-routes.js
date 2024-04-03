@@ -52,7 +52,11 @@ router.post('/', withAuth, async (req, res) => {
 
 router.put('/:id', withAuth, async (req, res) => {
     try {
-        const updatedPost = await Blog.update(req.body,
+        const updatedPost = await Blog.update(
+            {
+                title: req.body.title,
+                description: req.body.description,
+            },
             {
                 where: {
                     id: req.params.id,
@@ -60,8 +64,11 @@ router.put('/:id', withAuth, async (req, res) => {
                 },
             }
         );
-
-        res.status(200).json(updatedPost);
+        if (updatedPost) {
+            res.json({message: 'Updated successfully'});
+        } else {
+            res.status(400).json({message: 'Blog not found'});
+        }
     } catch (error) {
         res.status(400).json(error);
     }

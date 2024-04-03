@@ -1,17 +1,16 @@
 <div>
-    <h3>Edit This Post</h3>
+    <h3>Edit This Post: ID <span id="blog-id">{{blog.id}}</span></h3>
     <form action="" id="edit-blog-form">
-        <input type="hidden" id="blog-id" value="{{blog.id}}">
         <div class="create-form-section">
             <label for="title">Title:</label>
-            <input type="text" id="title" name="title" value="{{blog.title}}" required>
+            <input type="text" id="edit-title" name="title" value="{{blog.title}}" required>
         </div>
         <div class="create-form-section">
             <label for="description">Description:</label>
-            <textarea name="description" id="description" cols="30" rows="4" required>{{blog.description}}</textarea>
+            <textarea name="description" id="edit-description" cols="30" rows="4" required>{{blog.description}}</textarea>
         </div>
         <button type="submit" id="savechanges">Save Changes</button>
     </form>
 </div>
 
-<script src=""></script>
+<script src="/js/edit-post.js"></script>
